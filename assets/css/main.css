@@ -1,3 +1,4 @@
+
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -355,7 +356,7 @@ template {
 }
 
 .container {
-  max-width: 1080px;
+  max-width: 1440px;
   width: 100%;
   margin: 0 auto;
 }
@@ -369,3 +370,5 @@ a {
   color: inherit;
   cursor: pointer;
 }
+
+
