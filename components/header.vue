@@ -1,5 +1,4 @@
 <template>
-    <div class="container">
         <div class="header">
             <div class="header__top">
                 <div class="header__top-dropdowns">
@@ -49,7 +48,6 @@
             </div>
         </div>
         <hr>
-    </div>
 </template>
 
 <script setup lang="ts">
@@ -85,10 +83,10 @@ hr {
 }
 
 .phone-link {
-    color: white;
-    font-family: 'EurostileExtended', sans-serif;
+    font-family: 'EurostileExtMed', sans-serif;
     font-size: 14px;
     font-weight: 400;
+    color: white;
 }
 
 .header__top {
@@ -97,7 +95,7 @@ hr {
 
     &-currency {
         color: white;
-        font-family: 'InterFonts', sans-serif;
+        font-family: 'InterDisplayRegular', sans-serif;
         font-size: 14px;
         font-weight: 400;
     }
@@ -142,7 +140,10 @@ hr {
 
     &-links {
         flex-grow: 1;
-
+        font-family: 'EurostileExtMed', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        color: white;
         display: flex;
         gap: 40px;
         align-items: center;

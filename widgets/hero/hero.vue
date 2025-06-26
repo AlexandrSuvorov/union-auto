@@ -27,7 +27,7 @@
 <style lang="scss">
 .hero {
     color: white;
-
+    margin-bottom: 90px;
     &__heading {
         margin: 177px 50px;
     }
@@ -35,17 +35,22 @@
     &__title {
 
         &-text {
-            font-family: 'EurostileExtended', sans-serif;
+            font-family: 'EurostileExtMed', sans-serif;
             font-weight: 700;
             font-size: 49px;
-            line-height: 130%;
-            letter-spacing: 0%;
-            vertical-align: middle;
 
         }
     }
 
-    &__subtitle {}
+    &__subtitle {
+        &-text {
+            font-family: 'EurostileExtReg', sans-serif;
+            font-weight: 400;
+            font-size: 39px;
+
+        }
+    }
+
 }
 
 .letsgo {
@@ -78,5 +83,8 @@
     position: relative;
     z-index: 1;
     color: black;
+    font-family: 'EurostileExtMed', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
 }
 </style>

@@ -2,5 +2,5 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-  css: ['~/assets/css/main.css', '@/assets/css/fonts.scss']
+  css: ['~/assets/css/main.css', '@/assets/css/fonts.css']
 })

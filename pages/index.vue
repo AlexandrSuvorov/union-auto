@@ -6,12 +6,14 @@
 
             <Hero />
         </div>
+        <Service/>
     </div>
 </template>
 
 <script setup lang="ts">
 import Header from '@/components/header.vue';
-import Hero from '@/widgets/hero.vue';
+import Hero from '~/widgets/hero/hero.vue';
+import Service from '~/widgets/service/service.vue';
 </script>
 
 <style lang="scss">
