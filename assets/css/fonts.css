@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'InterDisplayRegular';
+    src: url("/assets/fonts/InterDisplay-Regular.woff2") format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'InterDisplayMedium';
+    src: url("/assets/fonts/Inter-Medium.woff2") format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  
+  @font-face {
+    font-family: 'EurostileExtBla';
+    src: url('/assets/fonts/EurostileExt-Bla.woff2') format('woff2');
+    font-weight: 500;
+
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'EurostileExtBold';
+    src: url('/assets/fonts/EurostileExt-Bold.woff2') format('woff2');
+    font-weight: 500;
+
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'EurostileExtMed';
+    src: url('/assets/fonts/EurostileExt-Med.woff2') format('woff2');
+    font-weight: 500;
+
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'EurostileExtReg';
+    src: url('/assets/fonts/EurostileExt-Reg.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
