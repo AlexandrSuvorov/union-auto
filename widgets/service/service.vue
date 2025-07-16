@@ -49,7 +49,7 @@ import moreButton from '~/UI/moreButton.vue';
 .card {
     display: flex;
     gap: 24px;
-    padding: 0 50px;
+    padding: 0 50px 140px;
 
     &__block:nth-child(2) {
         align-self: flex-end;

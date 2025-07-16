@@ -7,6 +7,7 @@
             <Hero />
         </div>
         <Service/>
+        <switchBrandType/>
     </div>
 </template>
 
@@ -14,6 +15,7 @@
 import Header from '@/components/header.vue';
 import Hero from '~/widgets/hero/hero.vue';
 import Service from '~/widgets/service/service.vue';
+import switchBrandType from '~/widgets/switchBrandType/switchBrandType.vue';
 </script>
 
 <style lang="scss">
