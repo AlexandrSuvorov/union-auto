@@ -5,26 +5,38 @@
             <button class="switch_btn" :class="{ active: activeTab === 'bodyType' }" @click="activeTab = 'bodyType'">
                 BODY TYPE
             </button>
-            <button class="switch_btn" :class="{ active: activeTab === 'brand' }" @click="activeTab = 'brand'"><!--Реализация переключателя-->
+            <button class="switch_btn" :class="{ active: activeTab === 'brand' }"
+                @click="activeTab = 'brand'">
                 BRAND
             </button>
-            
+
         </div>
         <div class="switch_block">
             <template v-if="activeTab === 'brand'">
-                <div v-for="brand in brands" :key="brand.id" class="switch_item">
-                    <p class="switch_name">{{ brand.name }}</p>
-                    <img :src="brand.img" :alt="brand.name" class="switch_img">
-                </div>
+                <template v-if="isLoadingBrands">
+                    <p class="isLoading">Loading brands...</p>
+                </template>
+                <template v-else>
+                    <div v-for="brand in brands" :key="brand.id" class="switch_item">
+                        <p class="switch_name">{{ brand.name }}</p>
+                        <img :src="brand.img" :alt="brand.name" class="switch_img" />
+                    </div>
+                </template>
             </template>
 
             <template v-if="activeTab === 'bodyType'">
-                <div v-for="body in bodyTypes" :key="body.id" class="switch_item">
-                    <p class="switch_name">{{ body.name }}</p>
-                    <img :src="body.img" :alt="body.name" class="switch_img">
-                </div>
+                <template v-if="isLoadingBodyTypes">
+                    <p class="isLoading">Loading body types...</p>
+                </template>
+                <template v-else>
+                    <div v-for="body in bodyTypes" :key="body.id" class="switch_item">
+                        <p class="switch_name">{{ body.name }}</p>
+                        <img :src="body.img" :alt="body.name" class="switch_img" />
+                    </div>
+                </template>
             </template>
         </div>
+
         <div class="switch_showall">
             <button class="switch_showall_btn">
                 Show all
@@ -36,54 +48,68 @@
 
 <script setup lang="ts">
 
-import { ref, onMounted } from "vue";
-
-interface Brand {
+interface IBrand {
     id: number;
     name: string;
     img: string;
 }
 
-interface BodyType {
+interface IBodyType {
     id: number;
     name: string;
     img: string;
 }
 
-const activeTab = ref<'brand' | 'bodyType'>('bodyType');
+type TabType = 'brand' | 'bodyType'
 
-const brands = ref<Brand[]>([]);
-const bodyTypes = ref<BodyType[]>([]);
+const activeTab = ref<TabType>('bodyType')
+
+const brands = ref<IBrand[]>([]);
+const bodyTypes = ref<IBodyType[]>([]);
+
+const config = useRuntimeConfig()
+
+const isLoadingBrands = ref(false)
+const isLoadingBodyTypes = ref(false)
 
 const fetchBrand = async () => {
-  try {
-    const response = await fetch('http://localhost:5000/api/brand');
-    const data = await response.json();
-    brands.value = data.slice(0, 7).map((brand: Brand) => ({//Выборка 7 значений из бд, а не всех 
+  isLoadingBrands.value = true
+
+  const { data, error } = await useFetch<IBrand[]>(`${config.public.apiBase}/api/brand`)
+
+  if (error.value) {
+    console.log('Ошибка при загрузке брендов')
+  } else if (data.value) {
+    brands.value = data.value.slice(0, 7).map((brand) => ({
       ...brand,
-      img: 'http://localhost:5000/' + brand.img,
-    }));
-  } catch (error) {
-    alert('Ошибка при загрузке брендов');
+      img: `${config.public.apiBase}/${brand.img}`,
+    }))
   }
-};
+
+  isLoadingBrands.value = false
+}
 
 const fetchBodyType = async () => {
-    try {
-        const response = await fetch('http://localhost:5000/api/type');
-        const data = await response.json();
-        bodyTypes.value = data.slice(0, 7).map((body: BodyType) => ({
-        ...body,
-            img: 'http://localhost:5000/' + body.img,
-        }));
-    } catch (error) {
-        alert('Ошибка при загрузке типов кузова');
-    }
-};
+  isLoadingBodyTypes.value = true
 
-onMounted(() => {
-    fetchBrand();
-    fetchBodyType();
+  const { data, error } = await useFetch<IBodyType[]>(`${config.public.apiBase}/api/type`)
+
+  if (error.value) {
+    console.log('Ошибка при загрузке типов кузова')
+  } else if (data.value) {
+    bodyTypes.value = data.value.slice(0, 7).map((body) => ({
+      ...body,
+      img: `${config.public.apiBase}/${body.img}`,
+    }))
+  }
+
+  isLoadingBodyTypes.value = false
+}
+
+
+onMounted(async() => {
+    await fetchBrand();
+    await fetchBodyType();
 });
 
 
@@ -99,8 +125,7 @@ onMounted(() => {
 
 .switch_header {
     text-align: center;
-    font-family: 'EurostileExtMed', sans-serif;
-    font-size: 24px;
+    font:500 normal 24px/100% 'EurostileExtBold';
     margin-bottom: 20px;
 }
 
@@ -113,18 +138,13 @@ onMounted(() => {
 .switch_btn {
     flex: 1;
     height: 55px;
-    background: transparent;
     color: black;
     border: 1px solid white;
     cursor: pointer;
     border-radius: 10px;
-    font-family: 'EurostileExtReg', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
+    font:500 normal 16px/100% 'EurostileExtReg';
     backdrop-filter: blur(4px);
     transition: background-color 0.3s, color 0.3s;
-    padding: 0;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -151,6 +171,7 @@ onMounted(() => {
     gap: 99px;
     margin-top: 16px;
     margin-bottom: 40px;
+
     &>* {
         flex: 1 1 0;
     }
@@ -170,28 +191,25 @@ onMounted(() => {
     }
 
     p {
-        font-family: 'EurostileExtReg', sans-serif;
-        font-size: 14px;
-        font-weight: 500;
+        font:500 normal 14px/100% 'EurostileExtReg';
         color: #4071CB;
     }
 }
 
 .switch_showall {
     display: flex;
-    justify-content:center ;
-    &_btn{
+    justify-content: center;
 
-    
-    background: transparent;
-    color: #4071CB;
-    border: 1px solid #4071CB;
-    cursor: pointer;
-    border-radius: 10px;
-    font-family: 'EurostileExtReg', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 11px 86px;
-}
+    &_btn {
+
+
+        background: transparent;
+        color: #4071CB;
+        border: 1px solid #4071CB;
+        cursor: pointer;
+        border-radius: 10px;
+        font:500 normal 14px/100% 'EurostileExtReg';
+        padding: 11px 86px;
+    }
 }
 </style>
