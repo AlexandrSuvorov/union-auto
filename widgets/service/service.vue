@@ -36,7 +36,7 @@
 import moreButton from '~/UI/moreButton.vue';
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @mixin card-image($url, $width, $height) {
     width: $width;
     height: $height;
