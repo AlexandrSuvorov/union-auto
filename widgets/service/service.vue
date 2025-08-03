@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import moreButton from '~/UI/moreButton.vue';
+</script>
+
 <template>
     <div class="card">
         <div class="card__right">
@@ -22,7 +26,6 @@
             <div class="card__servicing">
                 <div class="card__block">
                     <h3 class="card__heading">Servicing</h3>
-
                 </div>
                 <div class="card__block">
                     <more-button>MORE</more-button>
@@ -31,10 +34,6 @@
         </div>
     </div>
 </template>
-
-<script setup lang="ts">
-import moreButton from '~/UI/moreButton.vue';
-</script>
 
 <style lang="scss" scoped>
 @mixin card-image($url, $width, $height) {
@@ -75,8 +74,6 @@ import moreButton from '~/UI/moreButton.vue';
         padding: 30px
     }
 
-
-
     &__cars {
         @include card-image("/assets/image/card-carsforsale.png", 658px, 640px);
     }
@@ -88,7 +85,6 @@ import moreButton from '~/UI/moreButton.vue';
     &__servicing {
         @include card-image("/assets/image/card-servicing.png", 658px, 308px);
     }
-
 
     &__heading {
         color: #fff;

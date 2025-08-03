@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import CallbackButton from '~/UI/CallbackButton.vue';
+
+</script>
+
 <template>
     <div class="header">
         <div class="header__top">
@@ -33,25 +38,16 @@
         <hr>
         <div class="header__bottom">
             <img src="/assets/image/logo-hero.png" class="header_logo" alt="">
-
             <div class="header__links">
                 <a href="">FOR SALE</a>
                 <a href="">AUTOPARTS</a>
                 <a href="">SERVICING</a>
             </div>
-
             <div class="header__emptystub"></div>
         </div>
     </div>
     <hr>
 </template>
-
-<script setup lang="ts">
-import CallbackButton from '~/UI/callbackButton.vue';
-
-
-
-</script>
 
 <style lang="scss" scoped>
 select {

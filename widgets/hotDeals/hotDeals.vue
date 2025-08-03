@@ -16,11 +16,15 @@ interface ICars {
 }
 
 const localCars: ICars[] = [
-  { id: 1, brand: 'BMW', model: 'G30', img: '/local/auto/bmwg30.png', date: 2023, drive: 10.5, transmission: "AWD", type: "Sedan", price: 458_750 },
-  { id: 2, brand: 'Lexus', model: 'LX LX500d', img: '/local/auto/lexuslxlx500d.png', date: 2022, drive: 5.7, transmission: "AWD", type: "SUV", price: 458_750 },
-  { id: 3, brand: 'Mitsubishi', model: 'Pajero Sport GLX', img: '/local/auto/mitsubishipajerosportglx.png', date: 2022, drive: 2.4, transmission: "AWD", type: "SUV", price: 458_750 },
-  { id: 4, brand: 'Lexus', model: 'UX UX200 Luxury', img: '/local/auto/lexusuxux200luxury.png', date: 2022, drive: 2, transmission: "AWD", type: "SUV", price: 458_750 },
-  { id: 5, brand: 'Mercedes', model: 'Benz G-Class', img: '/local/auto/mercedesbenzgclass.png', date: 2022, drive: 4, transmission: "AWD", type: "SUV", price: 458_750 },
+  { id: 1, brand: 'BMW', model: 'G30', img: '/local/auto/bmwg30.png', date: 2023, drive: 10.5, transmission: "AWD", type: "Sedan", price: 3942000 },
+  { id: 2, brand: 'Lexus', model: 'LX LX500d', img: '/local/auto/lexuslxlx500d.png', date: 2022, drive: 5.7, transmission: "AWD", type: "SUV", price: 3219000 },
+  { id: 3, brand: 'Mitsubishi', model: 'Pajero Sport GLX', img: '/local/auto/mitsubishipajerosportglx.png', date: 2022, drive: 2.4, transmission: "AWD", type: "SUV", price: 3491000 },
+  { id: 4, brand: 'Lexus', model: 'UX UX200 Luxury', img: '/local/auto/lexusuxux200luxury.png', date: 2022, drive: 2, transmission: "AWD", type: "SUV", price: 2932000 },
+  { id: 5, brand: 'Mercedes', model: 'Benz G-Class', img: '/local/auto/mercedesbenzgclass.png', date: 2022, drive: 4, transmission: "AWD", type: "SUV", price: 5932000 },
+  { id: 6, brand: 'Honda', model: 'Civic', img: '/local/auto/hondacivic.png', date: 2024, drive: 4, transmission: "AWD", type: "Sedan", price: 2213200 },
+  { id: 7, brand: 'Mercedes', model: 'AMG GT', img: '/local/auto/mercedesamggt.png', date: 2022, drive: 6, transmission: "AWD", type: "Sedan", price: 3042000 },
+  { id: 8, brand: 'Dodge', model: 'Viper', img: '/local/auto/dodgeviper.png', date: 2022, drive: 8, transmission: "AWD", type: "Sedan", price: 4921000 },
+
 ];
 
 const cars = ref<ICars[]>(localCars);
@@ -49,11 +53,9 @@ onMounted(async () => {
 <template>
   <section class="hot-deals">
     <h1 class="hot-deals__header">HOT DEALS</h1>
-
     <template v-if="isLoadingCars">
       <p class="hot-deals__loading">Loading cars...</p>
     </template>
-
     <template v-else>
       <div class="hot-deals__list">
         <article v-for="car in cars" :key="car.id" class="hot-deals__card">
@@ -61,14 +63,11 @@ onMounted(async () => {
             <h2 class="card__title">{{ `${car.brand} ${car.model}` }}</h2>
             <span class="card__tag card__tag--new">&bull;NEW</span>
           </header>
-
           <p class="card__date">{{ car.date }}</p>
-
           <div class="card__image-wrapper">
             <img :src="car.img" :alt="car.model" class="card__image" />
             <div class="card__brand">{{ car.brand }}</div>
           </div>
-
           <div class="card__features features">
             <div class="features__item">
               <img src="/assets/image/drive.svg" class="features__icon" alt="Drive" />
@@ -83,7 +82,6 @@ onMounted(async () => {
               <p class="features__text">{{ car.type }}</p>
             </div>
           </div>
-
           <div class="card__button">
             <buttonPrice>{{ car.price }} AED</buttonPrice>
           </div>
@@ -91,11 +89,16 @@ onMounted(async () => {
       </div>
     </template>
   </section>
+  <section class="bigImage">
+    <div class="bigImage_block">
+      <img src="/assets/image/carBigImage.png" alt="" class="bigImage_image">
+    </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>
 .hot-deals {
-  padding: 0 50px;
+  padding: 0 50px 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -137,7 +140,7 @@ onMounted(async () => {
 
       .card__brand {
         color: #f1f0eb;
-        
+
       }
     }
   }
@@ -162,8 +165,6 @@ onMounted(async () => {
     z-index: 2;
     margin: 0;
     color: #4071cb;
-
-    
   }
 }
 
@@ -234,5 +235,13 @@ onMounted(async () => {
 
 .card__button {
   margin: 10px 20px 20px;
+}
+.bigImage{
+  padding: 0px 50px 165px;
+  box-sizing: border-box;
+}
+.bigImage_image{
+  width: 100%;
+  border-radius: 30px;
 }
 </style>

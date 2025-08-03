@@ -1,3 +1,7 @@
+<script setup lang="ts">
+
+</script>
+
 <template>
     <div class="hero">
         <div class="hero_heading">
@@ -16,13 +20,7 @@
             </div>
         </div>
     </div>
-
-
 </template>
-
-<script setup lang="ts">
-
-</script>
 
 <style lang="scss">
 .hero {
@@ -37,14 +35,12 @@
         font-family: 'EurostileExtMed', sans-serif;
         font-weight: 700;
         font-size: 49px;
-
     }
 
     &_subtitleText {
         font-family: 'EurostileExtReg', sans-serif;
         font-weight: 400;
         font-size: 39px;
-
     }
 
 }

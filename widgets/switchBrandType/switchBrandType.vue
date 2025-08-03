@@ -1,52 +1,4 @@
-<template>
-    <div class="switch">
-        <h1 class="switch_header">CHOOSE YOUR VEHICLE</h1>
-        <div class="switch_btnBlock">
-            <button class="switch_btn" :class="{ active: activeTab === 'bodyType' }" @click="activeTab = 'bodyType'">
-                BODY TYPE
-            </button>
-            <button class="switch_btn" :class="{ active: activeTab === 'brand' }" @click="activeTab = 'brand'">
-                BRAND
-            </button>
-
-        </div>
-        <div class="switch_block">
-            <template v-if="activeTab === 'brand'">
-                <template v-if="isLoadingBrands">
-                    <p class="isLoading">Loading brands...</p>
-                </template>
-                <template v-else>
-                    <div v-for="brand in brands" :key="brand.id" class="switch_item">
-                        <p class="switch_name">{{ brand.name }}</p>
-                        <img :src="brand.img" :alt="brand.name" class="switch_img" />
-                    </div>
-                </template>
-            </template>
-
-            <template v-if="activeTab === 'bodyType'">
-                <template v-if="isLoadingBodyTypes">
-                    <p class="isLoading">Loading body types...</p>
-                </template>
-                <template v-else>
-                    <div v-for="body in bodyTypes" :key="body.id" class="switch_item">
-                        <p class="switch_name">{{ body.name }}</p>
-                        <img :src="body.img" :alt="body.name" class="switch_img" />
-                    </div>
-                </template>
-            </template>
-        </div>
-
-        <div class="switch_showall">
-            <button class="switch_showall_btn">
-                Show all
-            </button>
-        </div>
-    </div>
-</template>
-
-
 <script setup lang="ts">
-
 interface IBrand {
     id: number;
     name: string;
@@ -59,7 +11,6 @@ interface IBodyType {
     img: string;
 }
 
-
 const localBrands: IBrand[] = [
     { id: 1, name: 'Audi', img: '/local/brand/audi.png' },
     { id: 2, name: 'BMW', img: '/local/brand/bmw.png' },
@@ -68,8 +19,7 @@ const localBrands: IBrand[] = [
     { id: 5, name: 'Mercedes', img: '/local/brand/mercedes.png' },
     { id: 6, name: 'Mitsubishi', img: '/local/brand/mitsubishi.png' },
     { id: 7, name: 'Subaru', img: '/local/brand/subaru.png' },
-    //{ id: 8, name: 'Toyota', img: '/local/brand/toyota.png' },
-
+//  { id: 8, name: 'Toyota', img: '/local/brand/toyota.png' },
 ];
 
 const localBodyTypes: IBodyType[] = [
@@ -79,22 +29,18 @@ const localBodyTypes: IBodyType[] = [
     { id: 4, name: 'Cab chassis', img: '/local/type/cabChassis.png' },
     { id: 5, name: 'Hatch', img: '/local/type/hatch.png' },
     { id: 6, name: 'Ute', img: '/local/type/ute.png' },
- //   { id: 7, name: 'Wagon', img: '/local/type/wagon.png' },
- //   { id: 8, name: 'Convertible', img: '/local/type/convertible.png' },
+//  { id: 7, name: 'Wagon', img: '/local/type/wagon.png' },
+//  { id: 8, name: 'Convertible', img: '/local/type/convertible.png' },
 
 ];
 
-
-
+const config = useRuntimeConfig()
 
 type TabType = 'brand' | 'bodyType'
-
 const activeTab = ref<TabType>('bodyType')
 
 const brands = ref<IBrand[]>(localBrands);
 const bodyTypes = ref<IBodyType[]>(localBodyTypes);
-
-const config = useRuntimeConfig()
 
 const isLoadingBrands = ref(false)
 const isLoadingBodyTypes = ref(false)
@@ -129,15 +75,55 @@ const fetchBodyType = async () => {
     isLoadingBodyTypes.value = false;
 };
 
-
 onMounted(async () => {
     await fetchBrand();
     await fetchBodyType();
 });
 
-
-
 </script>
+
+<template>
+    <div class="switch">
+        <h1 class="switch_header">CHOOSE YOUR VEHICLE</h1>
+        <div class="switch_btnBlock">
+            <button class="switch_btn" :class="{ active: activeTab === 'bodyType' }" @click="activeTab = 'bodyType'">
+                BODY TYPE
+            </button>
+            <button class="switch_btn" :class="{ active: activeTab === 'brand' }" @click="activeTab = 'brand'">
+                BRAND
+            </button>
+        </div>
+        <div class="switch_block">
+            <template v-if="activeTab === 'brand'">
+                <template v-if="isLoadingBrands">
+                    <p class="isLoading">Loading brands...</p>
+                </template>
+                <template v-else>
+                    <div v-for="brand in brands" :key="brand.id" class="switch_item">
+                        <p class="switch_name">{{ brand.name }}</p>
+                        <img :src="brand.img" :alt="brand.name" class="switch_img" />
+                    </div>
+                </template>
+            </template>
+            <template v-if="activeTab === 'bodyType'">
+                <template v-if="isLoadingBodyTypes">
+                    <p class="isLoading">Loading body types...</p>
+                </template>
+                <template v-else>
+                    <div v-for="body in bodyTypes" :key="body.id" class="switch_item">
+                        <p class="switch_name">{{ body.name }}</p>
+                        <img :src="body.img" :alt="body.name" class="switch_img" />
+                    </div>
+                </template>
+            </template>
+        </div>
+        <div class="switch_showall">
+            <button class="switch_showall_btn">
+                Show all
+            </button>
+        </div>
+    </div>
+</template>
 
 <style scoped lang="scss">
 .switch {
@@ -225,8 +211,6 @@ onMounted(async () => {
     justify-content: center;
 
     &_btn {
-
-
         background: transparent;
         color: #4071CB;
         border: 1px solid #4071CB;

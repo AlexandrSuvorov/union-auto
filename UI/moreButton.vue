@@ -1,12 +1,12 @@
+<script setup lang="ts">
+
+</script>
+
 <template>
   <button class="callback">
     <slot/>
   </button>
 </template>
-
-<script setup lang="ts">
-
-</script>
 
 <style lang="scss" scoped>
 .callback {
